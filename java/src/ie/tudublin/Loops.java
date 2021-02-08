@@ -1,5 +1,7 @@
 package ie.tudublin;
 
+import javax.lang.model.util.ElementScanner14;
+
 import processing.core.PApplet;
 
 public class Loops extends PApplet {
@@ -23,16 +25,66 @@ public class Loops extends PApplet {
     }
 
     public void setup() {
-        colorMode(HSB);
+        colorMode(HSB); //Hue,saturation and brightness
     }
 
     public void draw() {
         background(0);
+        noStroke();
         switch (mode)
         {
-            case 0:
-                ellipse(cx, cy, 100, 100);
+            case 0: 
+                fill(50,255,255);
+                if(mouseX < cx)
+                {
+                   
+                    rect(0,0,cx,height);
+                }
+                else{
+                    rect(cx,0,cx,height);
+                }
                 break;
+            
+            case 1:
+                fill(50,255,255);
+                if(mouseX < cx && mouseY < cy)
+                {
+                    rect(0,0,cx,cy);
+                    
+                }
+                else if (mouseX > cx && mouseY < cy)
+                {
+                    rect(cx,0,cx,cy);    
+                }
+                else if ( mouseX < cx && mouseY > cy)
+                {
+                    rect(0,cy,cx,cy);
+                }
+                else{
+                    rect(cx,cy,cx,cy);
+                }
+                break;
+                
+            case 2:
+                int numRects = (int)(mouseX / 10.0f);
+                float w = width / (float) numRects;
+                float cgap = 255/(float) numRects;
+                    
+                for (int i = 0 ; i <  numRects ; i++)
+                {
+                    fill(i * cgap,255,255);
+                    rect(i * w, 0 , w , height);
+                }
+            case 3:
+                int numCirc = 10;
+                float wc = width / (float) numCirc;
+                float ccgap = 255/(float) numCirc;
+                
+                for (int i = 0 ; i < numCirc ; i++)
+                {
+                    fill(i * ccgap,255,255);
+                    ellipse((i * wc) + wc / 2, cy , wc , wc);
+                }   
         }
     }
 }
